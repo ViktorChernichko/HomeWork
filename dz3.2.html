@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DZ3.2</title>
+</head>
+<body>
+<script>
+    // 1
+    let shoppingList = [
+        { name: "Bread", quantity: 2, bought: false },
+        { name: "Milk", quantity: 1, bought: true },
+        { name: "Eggs", quantity: 12, bought: false }
+    ];
+
+    function showList() {
+        shoppingList.sort((a, b) => a.bought - b.bought);
+        console.log("Shopping List:");
+        shoppingList.forEach(item => {
+            console.log(`${item.name} - ${item.quantity} - ${item.bought ? "Bought" : "Not bought"}`);
+        });
+    }
+
+    function addItem(name, quantity) {
+        let item = shoppingList.find(i => i.name === name);
+        if (item) {
+            item.quantity += quantity;
+        } else {
+            shoppingList.push({ name, quantity, bought: false });
+        }
+    }
+
+    function markAsBought(name) {
+        let item = shoppingList.find(i => i.name === name);
+        if (item) item.bought = true;
+    }
+
+    // 2
+    let receipt = [
+        { name: "Apple", quantity: 3, price: 5 },
+        { name: "Cheese", quantity: 1, price: 40 },
+        { name: "Juice", quantity: 2, price: 15 }
+    ];
+
+    function showReceipt() {
+        console.log("Receipt:");
+        receipt.forEach(item => {
+            console.log(`${item.name} - ${item.quantity} x ${item.price} = ${item.quantity * item.price}`);
+        });
+    }
+
+    function totalSum() {
+        return receipt.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    }
+
+    function mostExpensive() {
+        return receipt.reduce((max, item) => item.quantity * item.price > max.quantity * max.price ? item : max);
+    }
+
+    function averagePrice() {
+        let totalItems = receipt.reduce((sum, item) => sum + item.quantity, 0);
+        return totalSum() / totalItems;
+    }
+
+    // 3
+    let styles = [
+        { name: "color", value: "blue" },
+        { name: "font-size", value: "20px" },
+        { name: "text-align", value: "center" },
+        { name: "text-decoration", value: "underline" }
+    ];
+
+    function writeStyledText(text, styles) {
+        let styleStr = styles.map(s => `${s.name}:${s.value}`).join(";");
+        document.write(`<p style="${styleStr}">${text}</p>`);
+    }
+
+    // 4
+    let classrooms = [
+        { name: "A101", seats: 15, department: "Math" },
+        { name: "B202", seats: 20, department: "Physics" },
+        { name: "C303", seats: 10, department: "Math" }
+    ];
+
+    function showClassrooms() {
+        console.log("All Classrooms:");
+        classrooms.forEach(c => console.log(`${c.name} - ${c.seats} - ${c.department}`));
+    }
+
+    function showByDepartment(dept) {
+        return classrooms.filter(c => c.department === dept);
+    }
+
+    function suitableClassrooms(group) {
+        return classrooms.filter(c => c.seats >= group.students && c.department === group.department);
+    }
+
+    function sortBySeats() {
+        return [...classrooms].sort((a, b) => a.seats - b.seats);
+    }
+
+    function sortByName() {
+        return [...classrooms].sort((a, b) => a.name.localeCompare(b.name));
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>5</title>
+</head>
+<body>
+<ul id="bookList" style="list-style-type:-moz-ethiopic-numeric">
+    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam asperiores enim quae suscipit unde veritatis.</li>
+    <li>Lorem ipsum dolor sit.</li>
+    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus fugiat in incidunt obcaecati odit perspiciatis repellat ullam veritatis vero voluptatem.</li>
+    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias.</li>
+</ul>
+<script>
+    const list = document.getElementById("bookList");
+    list.addEventListener("click", e => {
+        if (e.target.tagName === "LI") {
+            [...list.children].forEach(li => li.style.background = "");
+            e.target.style.background = "orange";
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>3</title>
+    <style>
+        #field {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: url('https://pictures.pibig.info/uploads/posts/2023-04/1680385332_pictures-pibig-info-p-futbolnoe-pole-risunok-instagram-11.jpg');
+            background-size: cover;
+            overflow: hidden;
+        }
+        #ball {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('https://grizly.club/uploads/posts/2023-01/1674313049_grizly-club-p-futbolnii-myach-klipart-1.png');
+            background-size: contain;
+            border-radius: 50%;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+<body>
+<div id="field">
+    <div id="ball"></div>
+</div>
+<script>
+    const field = document.getElementById("field");
+    const ball = document.getElementById("ball");
+    field.addEventListener("click", e => {
+        const x = e.clientX - 50;
+        const y = e.clientY - 50;
+        const maxX = field.clientWidth - 100;
+        const maxY = field.clientHeight - 100;
+        ball.style.left = Math.max(0, Math.min(x, maxX)) + "px";
+        ball.style.top = Math.max(0, Math.min(y, maxY)) + "px";
+    });
+</script>
+</body>
+</html>

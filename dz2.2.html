@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DZ2.2</title>
+</head>
+<body>
+<script>
+    //1
+    const rangeStart = 1;
+    const rangeEnd = 10;
+    let rangeSum = 0;
+    for (let i = rangeStart; i <= rangeEnd; i++) rangeSum += i;
+
+    //2
+    const numA = 48;
+    const numB = 18;
+    let commonDivisor = 1;
+    for (let i = 1; i <= Math.min(numA, numB); i++) {
+        if (numA % i === 0 && numB % i === 0) commonDivisor = i;
+    }
+
+    //3
+    const target = 20;
+    const allDivisors = [];
+    for (let i = 1; i <= target; i++) {
+        if (target % i === 0) allDivisors.push(i);
+    }
+
+    //4
+    const digitSource = 123456;
+    const digitTotal = String(Math.abs(digitSource)).length;
+
+    //5
+    const inputNumbers = [5, -3, 0, 7, -2, 9, -1, 4, -6, 2];
+    const positiveNumbers = inputNumbers.filter(n => n > 0);
+    const positiveCount = positiveNumbers.length;
+
+    //6
+    const limit6 = 50;
+    const sumFiveNumbers6 = [];
+    for (let i = 1; i <= limit6; i++) {
+        const digitSum = String(i).split('').reduce((a, b) => a + Number(b), 0);
+        if (digitSum === 5) sumFiveNumbers6.push(i);
+    }
+
+    //7
+    const limit7 = 30;
+    const sumFiveNumbers7 = [];
+    for (let i = 1; i <= limit7; i++) {
+        const digitSum = String(i).split('').reduce((a, b) => a + Number(b), 0);
+        if (digitSum === 5) sumFiveNumbers7.push(i);
+    }
+
+    //8
+    const limit8 = 20;
+    const sumFiveNumbers8 = [];
+    for (let i = 1; i <= limit8; i++) {
+        const digitSum = String(i).split('').reduce((a, b) => a + Number(b), 0);
+        if (digitSum === 5) sumFiveNumbers8.push(i);
+    }
+
+    //9
+    const limit9 = 15;
+    const sumFiveNumbers9 = [];
+    for (let i = 1; i <= limit9; i++) {
+        const digitSum = String(i).split('').reduce((a, b) => a + Number(b), 0);
+        if (digitSum === 5) sumFiveNumbers9.push(i);
+    }
+
+    //10
+    const limit10 = 10;
+    const sumFiveNumbers10 = [];
+    for (let i = 1; i <= limit10; i++) {
+        const digitSum = String(i).split('').reduce((a, b) => a + Number(b), 0);
+        if (digitSum === 5) sumFiveNumbers10.push(i);
+    }
+</script>
+</body>
+</html>

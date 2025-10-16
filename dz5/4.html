@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>4</title>
+    <style>
+        #light {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: min-content;
+            background: #333;
+            padding: 10px;
+            gap: 10px;
+            border-radius: 10px;
+        }
+        .bulb {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: gray;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div id="light">
+    <div class="bulb" id="red"></div>
+    <div class="bulb" id="yellow"></div>
+    <div class="bulb" id="green"></div>
+</div>
+<button onclick="next()">Switch</button>
+
+<script>
+    const bulbs = ["red", "yellow", "green"];
+    let index = 0;
+    function next() {
+        bulbs.forEach(id => document.getElementById(id).style.background = "gray");
+        document.getElementById(bulbs[index]).style.background = bulbs[index];
+        index = (index + 1) % bulbs.length;
+    }
+</script>
+</body>
+</html>

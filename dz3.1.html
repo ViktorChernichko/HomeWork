@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DZ3.1</title>
+</head>
+<body>
+<script>
+    // 1
+    const car = {
+        manufacturer: "Toyota",
+        model: "Corolla",
+        year: 2020,
+        averageSpeed: 80, // km/h
+
+        showInfo() {
+            const info = `Car Info:
+            Manufacturer: ${this.manufacturer}
+            Model: ${this.model}
+            Year: ${this.year}
+            Average Speed: ${this.averageSpeed} km/h`;
+            document.body.innerText += info + "\n\n";
+        },
+
+        calculateTravelTime(distanceKm) {
+            const rawTime = distanceKm / this.averageSpeed;
+            const breaks = Math.floor(rawTime / 4);
+            const totalTime = rawTime + breaks;
+            document.body.innerText += `To cover ${distanceKm} km:
+            Raw time: ${rawTime.toFixed(2)} hours
+            Breaks: ${breaks} hour(s)
+            Total time: ${totalTime.toFixed(2)} hours\n\n`;
+        }
+    };
+
+    car.showInfo();
+    car.calculateTravelTime(640);
+
+    //2
+    function createFraction(numerator, denominator) {
+        return { numerator, denominator };
+    }
+
+    function gcd(a, b) {
+        return b === 0 ? a : gcd(b, a % b);
+    }
+
+    function simplify(fraction) {
+        const divisor = gcd(fraction.numerator, fraction.denominator);
+        return {
+            numerator: fraction.numerator / divisor,
+            denominator: fraction.denominator / divisor
+        };
+    }
+
+    function addFractions(a, b) {
+        const num = a.numerator * b.denominator + b.numerator * a.denominator;
+        const den = a.denominator * b.denominator;
+        return simplify({ numerator: num, denominator: den });
+    }
+
+    function subtractFractions(a, b) {
+        const num = a.numerator * b.denominator - b.numerator * a.denominator;
+        const den = a.denominator * b.denominator;
+        return simplify({ numerator: num, denominator: den });
+    }
+
+    function multiplyFractions(a, b) {
+        return simplify({
+            numerator: a.numerator * b.numerator,
+            denominator: a.denominator * b.denominator
+        });
+    }
+
+    function divideFractions(a, b) {
+        return simplify({
+            numerator: a.numerator * b.denominator,
+            denominator: a.denominator * b.numerator
+        });
+    }
+
+    const f1 = createFraction(2, 3);
+    const f2 = createFraction(3, 4);
+
+    document.body.innerText += `Fraction Operations:
+    Add: ${addFractions(f1, f2).numerator}/${addFractions(f1, f2).denominator}
+    Subtract: ${subtractFractions(f1, f2).numerator}/${subtractFractions(f1, f2).denominator}
+    Multiply: ${multiplyFractions(f1, f2).numerator}/${multiplyFractions(f1, f2).denominator}
+    Divide: ${divideFractions(f1, f2).numerator}/${divideFractions(f1, f2).denominator}
+    Simplify f1: ${simplify(f1).numerator}/${simplify(f1).denominator}\n\n`;
+
+    //3
+    const time = {
+        hours: 20,
+        minutes: 30,
+        seconds: 45,
+
+        showTime() {
+            const h = String(this.hours).padStart(2, '0');
+            const m = String(this.minutes).padStart(2, '0');
+            const s = String(this.seconds).padStart(2, '0');
+            document.body.innerText += `Current Time: ${h}:${m}:${s}\n`;
+        },
+
+        addSeconds(sec) {
+            let total = this.hours * 3600 + this.minutes * 60 + this.seconds + sec;
+            this.hours = Math.floor(total / 3600) % 24;
+            this.minutes = Math.floor((total % 3600) / 60);
+            this.seconds = total % 60;
+            this.showTime();
+        },
+
+        addMinutes(min) {
+            this.addSeconds(min * 60);
+        },
+
+        addHours(hr) {
+            this.addSeconds(hr * 3600);
+        }
+    };
+
+    document.body.innerText += `Time Operations:\n`;
+    time.showTime();
+    time.addSeconds(30);
+    time.addMinutes(90);
+    time.addHours(5);
+</script>
+</body>
+</html>

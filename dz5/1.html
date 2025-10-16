@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1</title>
+</head>
+<body>
+<form>
+    <label for="nameInput">Enter your name:</label>
+    <input
+            type="text"
+            id="nameInput"
+            name="username"
+            placeholder="Enter name"
+            autocomplete="off"
+            aria-label="Name"
+            required
+    >
+</form>
+
+<script>
+    document.getElementById("nameInput").addEventListener("keypress", function(e) {
+        if (/\d/.test(e.key)) e.preventDefault();
+    });
+</script>
+</body>
+</html>

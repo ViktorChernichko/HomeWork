@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tooltip Example</title>
+    <style>
+        .tooltip {
+            position: absolute;
+            background: #eee;
+            border: 1px solid #aaa;
+            padding: 5px;
+            display: none;
+            z-index: 10;
+        }
+        .btn {
+            margin: 50px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="btn" onmouseenter="showTip(this)" onmouseleave="hideTip()">
+    <button>Button</button>
+    <div class="tooltip">Tooltip text</div>
+</div>
+
+<script>
+    function showTip(el) {
+        const tip = el.querySelector(".tooltip");
+        tip.style.display = "block";
+        const rect = el.getBoundingClientRect();
+        const offset = tip.offsetHeight;
+        tip.style.top = (rect.top - offset > 0 ? -offset : el.offsetHeight) + "px";
+    }
+
+    function hideTip() {
+        document.querySelectorAll(".tooltip").forEach(t => t.style.display = "none");
+    }
+</script>
+</body>
+</html>
