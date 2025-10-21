@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>body {
+        transition: opacity ease-in 0.2s;
+    }
+
+    body[unresolved] {
+        opacity: 0;
+        display: block;
+        overflow: hidden;
+        position: relative;
+    }
+    </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .post {
+            border: 1px solid #ccc;
+            padding: 16px;
+            margin-bottom: 16px;
+            width: 30%;
+            float: left;
+        }
+
+        .post-thumb {
+            width: 100%;
+            height: auto;
+        }
+
+        @font-face {
+            font-family: 'NotoSans_online_security';
+            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-regular.woff);
+        }
+
+        @font-face {
+            font-family: 'NotoSans_medium_online_security';
+            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-medium.ttf);
+        }
+
+        @font-face {
+            font-family: 'NotoSans_bold_online_security';
+            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-bold.woff);
+        }
+
+        @font-face {
+            font-family: 'NotoSans_semibold_online_security';
+            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-semibold.ttf);
+        }
+    </style>
+</head>
+<body>
+<div id="dashboard">
+    <ul>
+        <li id="cmdFindByTag">FindByTag</li>
+        <li id="cmdFindByLikesCount"> Show where likes more 30
+            *) Use Input to enter like count
+        </li>
+        <li id="cmdFindByCommentsCount">FindByCommentsCount</li>
+        <li id="cmdFindByAuthor">FindByAuthor</li>
+        <li id="cmdFindOlderThenDate">FindOlderThenDate</li>
+        <li id="cmdShowAll"> Show all (clear filters)</li>
+    </ul>
+</div>
+<main class="blog">
+    <article class="post">
+        <header class="post-header">
+            <img src="https://placehold.co/600x300" alt="thumbnail" class="post-thumb">
+            <h2 class="post-title">Статья 1</h2>
+            <div class="post-meta">
+                <span class="post-author">Автор: John Doe</span>
+                <span class="post-date">01.09.2025</span>
+                <span class="post-tags">#javascript #web</span>
+            </div>
+        </header>
+        <p class="post-content">
+            Краткое описание статьи или вводный текст...
+        </p>
+        <footer class="post-footer">
+            <span class="post-likes">❤️ 25</span>
+            <span class="post-comments">💬 12</span>
+        </footer>
+    </article>
+
+    <article class="post">
+        <header class="post-header">
+            <img src="https://placehold.co/600x300" alt="thumbnail" class="post-thumb">
+            <h2 class="post-title">Статья 2</h2>
+            <div class="post-meta">
+                <span class="post-author">Автор: Jane Smith</span>
+                <span class="post-date">05.09.2025</span>
+                <span class="post-tags">#css #design</span>
+            </div>
+        </header>
+        <p class="post-content">
+            Краткое описание статьи или вводный текст...
+        </p>
+        <footer class="post-footer">
+            <span class="post-likes">❤️ 40</span>
+            <span class="post-comments">💬 8</span>
+        </footer>
+    </article>
+
+    <article class="post">
+        <header class="post-header">
+            <img src="https://placehold.co/600x300" alt="thumbnail" class="post-thumb">
+            <h2 class="post-title">Статья 3</h2>
+            <div class="post-meta">
+                <span class="post-author">Автор: Alex Brown</span>
+                <span class="post-date">10.09.2025</span>
+                <span class="post-tags">#html #semantics</span>
+            </div>
+        </header>
+        <p class="post-content">
+            Краткое описание статьи или вводный текст...
+        </p>
+        <footer class="post-footer">
+            <span class="post-likes">❤️ 15</span>
+            <span class="post-comments">💬 4</span>
+        </footer>
+    </article>
+
+    <article class="post">
+        <header class="post-header">
+            <img src="https://placehold.co/600x300" alt="thumbnail" class="post-thumb">
+            <h2 class="post-title">Статья 4</h2>
+            <div class="post-meta">
+                <span class="post-author">Автор: Emily Johnson</span>
+                <span class="post-date">12.09.2025</span>
+                <span class="post-tags">#react #frontend</span>
+            </div>
+        </header>
+        <p class="post-content">
+            Краткое описание статьи или вводный текст...
+        </p>
+        <footer class="post-footer">
+            <span class="post-likes">❤️ 60</span>
+            <span class="post-comments">💬 20</span>
+        </footer>
+    </article>
+
+    <article class="post">
+        <header class="post-header">
+            <img src="https://placehold.co/600x300" alt="thumbnail" class="post-thumb">
+            <h2 class="post-title">Статья 5</h2>
+            <div class="post-meta">
+                <span class="post-author">Автор: Chris Lee</span>
+                <span class="post-date">15.09.2025</span>
+                <span class="post-tags">#backend #nodejs</span>
+            </div>
+        </header>
+        <p class="post-content">
+            Краткое описание статьи или вводный текст...
+        </p>
+        <footer class="post-footer">
+            <span class="post-likes">❤️ 33</span>
+            <span class="post-comments">💬 11</span>
+        </footer>
+    </article>
+
+    <article class="post">
+        <header class="post-header">
+            <img src="https://placehold.co/600x300" alt="thumbnail" class="post-thumb">
+            <h2 class="post-title">Статья 6</h2>
+            <div class="post-meta">
+                <span class="post-author">Автор: Anna Taylor</span>
+                <span class="post-date">20.09.2025</span>
+                <span class="post-tags">#ai #ml</span>
+            </div>
+        </header>
+        <p class="post-content">
+            Краткое описание статьи или вводный текст...
+        </p>
+        <footer class="post-footer">
+            <span class="post-likes">❤️ 77</span>
+            <span class="post-comments">💬 25</span>
+        </footer>
+    </article>
+</main>
+
+
+<script>
+
+    const dashboard = document.getElementById('dashboard');
+    const buttons = dashboard.querySelectorAll('li');
+    const posts = document.querySelectorAll('.post');
+
+    function clearActive() {
+        buttons.forEach(btn => btn.style.backgroundColor = '');
+    }
+
+    function showAllPosts() {
+        posts.forEach(post => post.style.display = 'block');
+    }
+
+    function activateFilter(button) {
+        clearActive();
+        button.style.backgroundColor = '#e0e0e0';
+    }
+
+    document.getElementById('cmdFindByTag').onclick = function () {
+        const tag = prompt('Введіть тег для пошуку (без #):');
+        if (!tag) return;
+
+        posts.forEach(post => {
+            const tags = post.querySelector('.post-tags').textContent;
+            post.style.display = tags.includes(`#${tag}`) ? 'block' : 'none';
+        });
+
+        activateFilter(this);
+    };
+
+    document.getElementById('cmdFindByLikesCount').onclick = function () {
+        const threshold = parseInt(prompt('Введіть мінімальну кількість лайків:'), 10);
+        if (isNaN(threshold)) return;
+
+        posts.forEach(post => {
+            const likes = parseInt(post.querySelector('.post-likes').textContent.replace('❤️', '').trim());
+            post.style.display = likes > threshold ? 'block' : 'none';
+        });
+
+        activateFilter(this);
+    };
+
+    document.getElementById('cmdFindByCommentsCount').onclick = function () {
+        const threshold = parseInt(prompt('Введіть мінімальну кількість коментарів:'), 10);
+        if (isNaN(threshold)) return;
+
+        posts.forEach(post => {
+            const comments = parseInt(post.querySelector('.post-comments').textContent.replace('💬', '').trim());
+            post.style.display = comments > threshold ? 'block' : 'none';
+        });
+
+        activateFilter(this);
+    };
+
+    document.getElementById('cmdFindByAuthor').onclick = function () {
+        const author = prompt('Введіть ім’я автора:');
+        if (!author) return;
+
+        posts.forEach(post => {
+            const postAuthor = post.querySelector('.post-author').textContent.replace('Автор: ', '').trim().toLowerCase();
+            post.style.display = postAuthor.includes(author.toLowerCase()) ? 'block' : 'none';
+        });
+
+        activateFilter(this);
+    };
+
+    document.getElementById('cmdFindOlderThenDate').onclick = function () {
+        const inputDate = prompt('Введіть дату у форматі ДД.ММ.РРРР:');
+        if (!inputDate) return;
+
+        const [day, month, year] = inputDate.split('.');
+        const filterDate = new Date(`${year}-${month}-${day}`);
+
+        posts.forEach(post => {
+            const postDateText = post.querySelector('.post-date').textContent.trim();
+            const [d, m, y] = postDateText.split('.');
+            const postDate = new Date(`${y}-${m}-${d}`);
+
+            post.style.display = postDate < filterDate ? 'block' : 'none';
+        });
+
+        activateFilter(this);
+    };
+
+    document.getElementById('cmdShowAll').onclick = function () {
+        showAllPosts();
+        clearActive();
+        this.style.backgroundColor = '#e0e0e0';
+    };
+
+</script>
+
+</body>
+</html>
