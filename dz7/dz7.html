@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game</title>
+    <style>
+        #gamePad {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            max-width: 660px;
+            margin: 20px auto;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: white;
+
+        }
+
+        .card img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border: 1px solid #eee;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body bgcolor="bisque">
+
+<header>
+    <h1> Memory Game </h1>
+    <nav>
+        <ul>
+            <li id="cmdStart"> Start Game </li>
+        </ul>
+    </nav>
+</header>
+
+<main id="gamePad">
+</main>
+
+
+<script>
+    const gamePad = document.getElementById("gamePad");
+    const cardCount = 36;
+
+    const cards = [
+        { id: 1, url: "img/horse.png", name: "horse" },
+        { id: 2, url: "img/rabbit.png", name: "rabbit" },
+        { id: 3, url: "img/snake_1.png", name: "snake" },
+        { id: 4, url: "img/snake_2.png", name: "snake" },
+        { id: 5, url: "img/snake_3.png", name: "snake" },
+    ];
+
+    let firstCard = null;
+    let secondCard = null;
+    let matchedCount = 0;
+
+    function onMouseOverCard(event) {
+        const card = event.currentTarget;
+        const img = card.querySelector("img");
+        img.style.opacity = "1";
+    }
+
+    function onMouseOutCard(event) {
+        const card = event.currentTarget;
+        if (card.getAttribute("is-open") === "true") return;
+        const img = card.querySelector("img");
+        img.style.opacity = "0";
+    }
+
+    function onCardClick(event) {
+        const card = event.currentTarget;
+        if (card.getAttribute("is-open") === "true" || secondCard) return;
+
+        const img = card.querySelector("img");
+        img.style.opacity = "1";
+        card.setAttribute("is-open", true);
+        card.style.background = "#eee";
+
+        if (!firstCard) {
+            firstCard = card;
+        } else {
+            secondCard = card;
+            const name1 = firstCard.getAttribute("data-name");
+            const name2 = secondCard.getAttribute("data-name");
+
+            if (name1 === name2) {
+                matchedCount += 2;
+                firstCard = null;
+                secondCard = null;
+                if (matchedCount === cardCount) {
+                    setTimeout(() => alert("Victory"), 300);
+                }
+            } else {
+                setTimeout(() => {
+                    [firstCard, secondCard].forEach(c => {
+                        c.querySelector("img").style.opacity = "0";
+                        c.setAttribute("is-open", false);
+                        c.style.backgroundColor = 'white';
+                    });
+                    firstCard = null;
+                    secondCard = null;
+                }, 1000);
+            }
+        }
+    }
+
+    function renderCard(card) {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.onmouseover = onMouseOverCard;
+        div.onmouseout = onMouseOutCard;
+        div.addEventListener("click", onCardClick);
+        div.setAttribute("data-id", card.id);
+        div.setAttribute("data-name", card.name);
+        const img = document.createElement("img");
+        img.src = card.url;
+        img.alt = card.name;
+        div.appendChild(img);
+        return div;
+    }
+
+    function renderGamePad() {
+        gamePad.innerHTML = "";
+        firstCard = null;
+        secondCard = null;
+        matchedCount = 0;
+
+        const pool = [];
+        while (pool.length < cardCount) {
+            const card = cards[Math.floor(Math.random() * cards.length)];
+            pool.push({ ...card });
+            pool.push({ ...card });
+        }
+
+        pool.sort(() => Math.random() - 0.5);
+        pool.length = cardCount;
+
+        pool.forEach(card => {
+            const cardElement = renderCard(card);
+            gamePad.appendChild(cardElement);
+        });
+    }
+
+    document.getElementById("cmdStart").addEventListener("click", renderGamePad);
+</script>
+
+
+</body>
+</html>
