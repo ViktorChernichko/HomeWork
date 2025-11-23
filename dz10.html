@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DZ10</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        h1 { color: #2c3e50; }
+        button { padding: 10px 15px; font-size: 16px; margin-bottom: 20px; cursor: pointer; }
+        pre { background: #fff; padding: 15px; border: 1px solid #ccc; max-height: 500px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+<h1>JavaScript Tasks Demo</h1>
+<button onclick="runTasks()">Run All Tasks</button>
+<pre id="output"></pre>
+
+<script>
+    function log(message) {
+        const output = document.getElementById("output");
+        output.textContent += message + "\n";
+    }
+
+    // 1
+    function processArray(array, callback) {
+        return array.map(callback);
+    }
+
+    function doubleElement(element) {
+        return element * 2;
+    }
+
+    function reverseElement(element) {
+        return element.toString().split("").reverse().join("");
+    }
+
+    // 2
+
+    function filterArray(array, callback) {
+        return array.filter(callback);
+    }
+
+    function isEven(number) {
+        return number % 2 === 0;
+    }
+
+    function isShortWord(word) {
+        return word.length <= 4;
+    }
+
+    // 3
+    function washDishes() {
+        return new Promise(resolve => {
+            setTimeout(() => resolve("The dishes are washed."), 1000);
+        });
+    }
+
+    function cleanRoom() {
+        return new Promise(resolve => {
+            setTimeout(() => resolve("The room is cleaned."), 1000);
+        });
+    }
+
+    function makeDinner() {
+        return new Promise(resolve => {
+            setTimeout(() => resolve("Dinner is ready."), 1000);
+        });
+    }
+
+    // 4
+    function sortArray(array) {
+        return new Promise((resolve, reject) => {
+            if (array.length === 0) {
+                reject("Array is empty.");
+            } else {
+                setTimeout(() => {
+                    resolve(array.sort((a, b) => a - b));
+                }, 1000);
+            }
+        });
+    }
+
+    // 5
+    function multiplyAsync(a, b) {
+        return new Promise((resolve, reject) => {
+            if (typeof a !== "number" || typeof b !== "number") {
+                reject("Incorrect values.");
+            } else {
+                setTimeout(() => resolve(a * b), 1000);
+            }
+        });
+    }
+
+    // 6
+    function sortArrayAsync(array) {
+        return new Promise((resolve, reject) => {
+            if (array.length === 0) {
+                reject("Array is empty.");
+            } else {
+                setTimeout(() => {
+                    resolve(array.sort((a, b) => a - b));
+                }, 1000);
+            }
+        });
+    }
+
+
+
+
+
+    async function runTasks() {
+        document.getElementById("output").textContent = "";
+
+        log("Task 1:");
+        log(processArray([1, 2, 3, 4, 5], doubleElement));
+        log(processArray(["hello", "world"], reverseElement));
+
+        log("\nTask 2:");
+        log(filterArray([1, 2, 3, 4, 5], isEven));
+        log(filterArray(["cat", "elephant", "dog", "bird"], isShortWord));
+
+        log("\nTask 3:");
+        await washDishes().then(res => log(res));
+        await cleanRoom().then(res => log(res));
+        await makeDinner().then(res => log(res));
+
+        log("\nTask 4:");
+        await sortArray([5, 3, 8, 1])
+            .then(sorted => log(sorted))
+            .catch(err => log(err));
+
+        log("\nTask 5:");
+        try {
+            const result = await multiplyAsync(6, 9);
+            log("Result: " + result);
+        } catch (error) {
+            log(error);
+        }
+
+        log("\nTask 6:");
+        try {
+            const sorted = await sortArrayAsync([10, 2, 8, 4]);
+            log("Sorted: " + sorted);
+        } catch (error) {
+            log(error);
+        }
+    }
+</script>
+</body>
+</html>
