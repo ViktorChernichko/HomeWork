@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DZ8</title>
+    <link rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            background: #fff;
+            padding: 24px 48px 24px 24px;;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,.1);
+            width: 320px;
+        }
+
+        .form-control {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2962ff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .instruction-link {
+            text-align: center;
+            margin-top: 12px;
+            margin-left: 10px;
+        }
+
+        .instruction-link a {
+            color: #2962ff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="card">
+        <h2>Registration</h2>
+        <form id="registerForm" novalidate>
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required />
+            </div>
+
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+
+            <div class="form-control">
+                <label for="confirm">Confirm Password</label>
+                <input type="password" id="confirm" name="confirm" required />
+            </div>
+
+            <button type="submit" id="submitBtn">Register</button>
+        </form>
+
+        <p class="instruction-link">
+            <a href="#" id="showInstructions">Instruction</a>
+        </p>
+    </div>
+</div>
+
+<div id="instructionPopup" class="popup">
+    <div class="popup-content">
+        <h3>How to fill the form</h3>
+        <ul>
+            <li>Email: must be valid format (name@example.com)</li>
+            <li>Username: 3–20 characters, letters/numbers/_/-</li>
+            <li>Password: at least 8 chars, upper/lowercase, number, special symbol</li>
+            <li>No simple sequences like 1234 or abcd</li>
+            <li>Confirm Password must match</li>
+        </ul>
+        <button id="closePopup">Close</button>
+    </div>
+</div>
+
+<script>
+    const link = document.getElementById('showInstructions');
+    const popup = document.getElementById('instructionPopup');
+    const closeBtn = document.getElementById('closePopup');
+
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        popup.style.display = 'flex';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirm = document.getElementById('confirm').value;
+
+        const errors = [];
+
+        if (username.length < 3) {
+            errors.push('Username must be at least 3 characters.');
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errors.push('Invalid email format.');
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            errors.push('Password must be at least 8 characters and include uppercase, lowercase, number, and special character.');
+        }
+
+        if (password !== confirm) {
+            errors.push('Passwords do not match.');
+        }
+
+        if (hasSequentialChars(password)) {
+            errors.push('Password must not contain simple sequences (e.g. 1234, abcd, 9876).');
+        }
+
+        if (errors.length > 0) {
+            alert(errors.join('\n'));
+        } else {
+            alert('Registration successful!');
+        }
+    });
+
+    function hasSequentialChars(str, minSeqLen = 4) {
+        const s = str.toLowerCase();
+
+        for (let i = 0; i <= s.length - minSeqLen; i++) {
+            let asc = true;
+            let desc = true;
+
+            for (let j = 1; j < minSeqLen; j++) {
+                const prev = s.charCodeAt(i + j - 1);
+                const curr = s.charCodeAt(i + j);
+
+                if (curr !== prev + 1) asc = false;
+                if (curr !== prev - 1) desc = false;
+            }
+
+            if (asc || desc) return true;
+        }
+        return false;
+    }
+
+</script>
+
+
+</body>
+</html>
